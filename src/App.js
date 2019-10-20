@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { withStyles } from "@material-ui/core/styles";
+import styles from "./styles/styles";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Search from "./components/Search";
+import FilmDetails from "./components/FilmDetails";
+import NotFoundPage from "./components/NotFoundPage";
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  constructor(props) {
+    super();
+  }
+
+  render() {
+    return (
+      <Router >
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Search} />
+          <Route exact path='/details/:id' component={FilmDetails} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        <Footer />
+      </Router>
+    )
+
+
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
